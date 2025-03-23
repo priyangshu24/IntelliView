@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { PublicLayout } from '@/layouts/public-layout';
 import AuthenticationLayout from '@/layouts/auth-layout';
 
-import HomePage from '@/routes/home';
-import { SignIN } from './routes/sign-in';
-import { SignUp } from './routes/sign-up';
+import {HomePage} from '@/routes/home';
+import { SignInPage } from '@/routes/sign-in';
+import { SignUpPage } from '@/routes/sign-up';
+import ProtectRoutes from '@/layouts/protected-routes';
+import { MainLayout } from '@/layouts/main-layout';
 
 // import {Button} from '@/components/ui/button'
 // import { icons } from 'lucide-react'
@@ -14,17 +16,27 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/*Public routes*/}
-        <Route element={<PublicLayout/>}>
-        <Route index element={<HomePage/>}/>
+        {/* public routes */}
+        <Route element={<PublicLayout />}>
+          <Route index element={<HomePage />} />
         </Route>
 
-        {/*Authenticated routes*/}
-        <Route element={<AuthenticationLayout/>}>
-        <Route path='/signin' element={<SignIN/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
+        {/* authentication layout */}
+        <Route element={<AuthenticationLayout />}>
+          <Route path="/signin/*" element={<SignInPage />} />
+          <Route path="/signup/*" element={<SignUpPage />} />
         </Route>
 
+        {/* protected routes */}
+        <Route
+          element={
+            <ProtectRoutes>
+              <MainLayout/>
+            </ProtectRoutes>
+          }>
+            
+          <Route/>
+        </Route>
       </Routes>
     </Router>
   )

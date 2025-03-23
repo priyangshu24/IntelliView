@@ -1,10 +1,5 @@
-export const SignUp
- = () => {
-  return (
-    <div>
-        Sign Up
-    </div>
-  )
-}
+import { SignUp } from "@clerk/clerk-react";
 
-
+export const SignUpPage = () => {
+  return <SignUp path="/signup" />;
+};
