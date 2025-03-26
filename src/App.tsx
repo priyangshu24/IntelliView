@@ -1,45 +1,46 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// Layout Components
 import { PublicLayout } from '@/layouts/public-layout';
 import AuthenticationLayout from '@/layouts/auth-layout';
+import { MainLayout } from '@/layouts/main-layout';
+import ProtectRoutes from '@/layouts/protected-routes';
 
-import {HomePage} from '@/routes/home';
+// Page Route Components
+import HomePage from './routes/home';
 import { SignInPage } from '@/routes/sign-in';
 import { SignUpPage } from '@/routes/sign-up';
-import ProtectRoutes from '@/layouts/protected-routes';
-import { MainLayout } from '@/layouts/main-layout';
-
-// import {Button} from '@/components/ui/button'
-// import { icons } from 'lucide-react'
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* public routes */}
+        {/* Public Routes - Accessible to everyone */}
         <Route element={<PublicLayout />}>
           <Route index element={<HomePage />} />
         </Route>
 
-        {/* authentication layout */}
+        {/* Authentication Routes - For login and registration */}
         <Route element={<AuthenticationLayout />}>
           <Route path="/signin/*" element={<SignInPage />} />
           <Route path="/signup/*" element={<SignUpPage />} />
         </Route>
 
-        {/* protected routes */}
+        {/* Protected Routes - Requires authentication */}
         <Route
           element={
             <ProtectRoutes>
-              <MainLayout/>
+              <MainLayout />
             </ProtectRoutes>
-          }>
-            
-          <Route/>
+          }
+        >
+          {/* Add your protected routes here */}
+          <Route path="/dashboard" element={<div>Dashboard</div>} />
+          {/* Example: <Route path="/profile" element={<ProfilePage />} /> */}
         </Route>
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
