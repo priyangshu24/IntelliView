@@ -1,32 +1,35 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Layout Components
-import { PublicLayout } from '@/layouts/public-layout';
-import AuthenticationLayout from '@/layouts/auth-layout';
-import { MainLayout } from '@/layouts/main-layout';
-import ProtectRoutes from '@/layouts/protected-routes';
+import { PublicLayout } from "@/layouts/public-layout";
+import AuthenticationLayout from "@/layouts/auth-layout";
+import ProtectRoutes from "@/layouts/protected-routes";
+import { MainLayout } from "@/layouts/main-layout";
 
-// Page Route Components
-import HomePage from './routes/home';
-import { SignInPage } from '@/routes/sign-in';
-import { SignUpPage } from '@/routes/sign-up';
+import HomePage from "@/routes/home";
+import { SignInPage } from "./routes/sign-in";
+import { SignUpPage } from "./routes/sign-up";
+import { Generate } from "./components/generate";
+import { Dashboard } from "./routes/dashboard";
+import { CreateEditPage } from "./routes/create-edit-page-page";
+
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Routes - Accessible to everyone */}
+        {/* public routes */}
         <Route element={<PublicLayout />}>
           <Route index element={<HomePage />} />
         </Route>
 
-        {/* Authentication Routes - For login and registration */}
+        {/* authentication layout */}
         <Route element={<AuthenticationLayout />}>
           <Route path="/signin/*" element={<SignInPage />} />
           <Route path="/signup/*" element={<SignUpPage />} />
         </Route>
 
-        {/* Protected Routes - Requires authentication */}
+        {/* protected routes */}
         <Route
           element={
             <ProtectRoutes>
@@ -34,9 +37,16 @@ const App = () => {
             </ProtectRoutes>
           }
         >
-          {/* Add your protected routes here */}
-          <Route path="/dashboard" element={<div>Dashboard</div>} />
-          {/* Example: <Route path="/profile" element={<ProfilePage />} /> */}
+          {/* add all the protect routes */}
+          <Route element={<Generate />} path="/generate">
+            <Route index element={<Dashboard />} />
+            <Route path=":interviewId" element={<CreateEditPage />} />
+            {/* <Route path="interview/:interviewId" element={<MockLoadPage />} /> */}
+            {/* <Route
+              path="interview/:interviewId/start"
+              element={<MockInterviewPage />}
+            /> */}
+          </Route>
         </Route>
       </Routes>
     </Router>

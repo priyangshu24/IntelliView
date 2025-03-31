@@ -57,14 +57,14 @@ const ServiceItem = ({ children }: { children: React.ReactNode }) => {
 
 export const Footer = () => {
   return (
-    <footer className="relative pt-16 pb-10 overflow-hidden text-gray-200 bg-gradient-to-b from-gray-900 to-gray-800">
+    <footer className="relative pt-10 pb-6 overflow-hidden text-gray-200 bg-gradient-to-b from-gray-900 to-gray-800">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600"></div>
       <div className="absolute top-0 right-0 w-64 h-64 transform translate-x-1/2 -translate-y-1/2 bg-blue-500 rounded-full opacity-5"></div>
       <div className="absolute bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2 bg-green-500 rounded-full w-96 h-96 opacity-5"></div>
       
       <Container>
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* First Column: About Us */}
           <div className="lg:pr-6">
             <h3 className="pb-3 mb-6 text-2xl font-bold text-white after:content-[''] after:block after:w-16 after:h-1 after:mt-3 after:bg-green-400">
@@ -75,28 +75,28 @@ export const Footer = () => {
               AI-powered tools. Our platform offers a wide range of resources to 
               improve your interview skills and chances of success.
             </p>
-            <div className="flex mt-6">
+            <div className="flex mt-4">
               <SocialLink 
                 href="https://facebook.com" 
-                icon={<Facebook size={18} />} 
+                icon={<Facebook size={16} />} 
                 hoverColor="text-white" 
                 bgColor="bg-blue-600"
               />
               <SocialLink 
                 href="https://twitter.com" 
-                icon={<Twitter size={18} />} 
+                icon={<Twitter size={16} />} 
                 hoverColor="text-white" 
                 bgColor="bg-blue-400"
               />
               <SocialLink 
                 href="https://instagram.com" 
-                icon={<Instagram size={18} />} 
+                icon={<Instagram size={16} />} 
                 hoverColor="text-white" 
                 bgColor="bg-pink-600"
               />
               <SocialLink 
                 href="https://linkedin.com" 
-                icon={<Linkedin size={18} />} 
+                icon={<Linkedin size={16} />} 
                 hoverColor="text-white" 
                 bgColor="bg-blue-700"
               />
@@ -140,12 +140,12 @@ export const Footer = () => {
               123 AI Street, Tech City, 12345
             </ContactInfo>
             <ContactInfo icon={<Phone size={18} />}>
-              +1 (555) 123-4567
+              +91 123 456 7890
             </ContactInfo>
             <ContactInfo icon={<Mail size={18} />}>
-              info@yourcompany.com
+              intelliView@example.com
             </ContactInfo>
-            <div className="p-4 mt-6 bg-gray-700 border border-gray-700 rounded-lg bg-opacity-30">
+            <div className="p-2 mt-4 bg-gray-700 border border-gray-700 rounded-lg bg-opacity-30">
               <p className="text-sm text-gray-300">Subscribe to our newsletter</p>
               <div className="flex mt-3">
                 <input 
@@ -162,12 +162,12 @@ export const Footer = () => {
         </div>
         
         {/* Copyright Section */}
-        <div className="pt-8 mt-12 border-t border-gray-700">
+        <div className="border-t border-gray-700 mt-68 pt-">
           <div className="flex flex-col items-center justify-between md:flex-row">
             <p className="mb-4 text-sm text-gray-400 md:mb-0">
-              © {new Date().getFullYear()} Your Company Name. All rights reserved.
+              © {new Date().getFullYear()} IntelliView . All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-gray-400">
+            <div className="flex space-x-4 text-sm text-gray-400">
               <Link to="/privacy" className="transition-colors duration-300 hover:text-white">Privacy Policy</Link>
               <Link to="/terms" className="transition-colors duration-300 hover:text-white">Terms of Service</Link>
               <Link to="/cookies" className="transition-colors duration-300 hover:text-white">Cookie Policy</Link>
