@@ -6,27 +6,34 @@ import { NavigationRoutes } from "./navigation-routes";
 import { NavLink } from "react-router-dom";
 import { ProfileContainer } from "./profile-container";
 import { ToggleContainer } from "./toggle-container";
+
 const Header = () => {
   const { userId } = useAuth();
+  
   return (
     <header
-      className={cn("w-full border-b duration-150 transition-all ease-in-out")}
+      className={cn(
+        "w-full border-b sticky top-0 z-50 bg-white/90 backdrop-blur-md transition-all duration-200 ease-in-out shadow-sm"
+      )}
     >
       <Container>
-        <div className="flex items-center gap-4 w-full">
-          {/* Logo */}
-          <LogoContainer />
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-3">
-            {/* <ul className="flex items-center gap-6"></ul> */}
+        <div className="flex items-center justify-between w-full h-12 md:h-14">
+          {/* Logo - Made smaller */}
+          <div className="flex items-center origin-left scale-90">
+            <LogoContainer />
+          </div>
+          
+          {/* Desktop Navigation - Reduced padding */}
+          <nav className="items-center hidden mx-4 space-x-4 md:flex">
             <NavigationRoutes />
+            
             {userId && (
               <NavLink
                 to={"/generate"}
                 className={({ isActive }) =>
                   cn(
-                    "text-base text-neutral-600",
-                    isActive && "text-neutral-900 font-semibold"
+                    "px-3 py-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200",
+                    isActive && "text-blue-600 font-semibold"
                   )
                 }
               >
@@ -34,19 +41,21 @@ const Header = () => {
               </NavLink>
             )}
           </nav>
-          <div className="ml-auto flex items-center gap-6">
-            {/*profile*/}
-            <ProfileContainer/>
-
-            {/* mobile toggle section */}
-            <ToggleContainer/>
-
-            {/* ProfileContainer
-            <ProfileContainer /> */}
+          
+          {/* Right side items - Reduced scale */}
+          <div className="flex items-center gap-3 origin-right scale-95">
+            {/* Profile */}
+            <ProfileContainer />
+            
+            {/* Mobile toggle */}
+            <div className="md:hidden">
+              <ToggleContainer />
+            </div>
           </div>
         </div>
       </Container>
     </header>
   );
 };
+
 export default Header;
