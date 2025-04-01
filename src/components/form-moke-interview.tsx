@@ -10,8 +10,11 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { Headings } from "./heading";
 import { Button } from "./ui/button";
-import { Trash2 } from "lucide-react";
+import { Loader, Trash2 } from "lucide-react";
 import { Separator } from "@radix-ui/react-separator";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 interface FormMockInterviewProps {
     initialData : Interview | null
@@ -52,9 +55,14 @@ export const ForMokInterview = ({initialData}: FormMockInterviewProps) => {
       ? { title: "Updated..!", description: "Changes saved successfully..." }
       : { title: "Created..!", description: "New Mock Interview created..." };
 
-    const onSubmit = async (data: FormData) => {
+
+          const onSubmit = async (data: FormData) => {
         try{
             setLoading(true);
+
+            if(initialData){
+              const aiResult = await generateAiResponse(data);
+            }
         }
         catch (error) {
             console.log(error);
@@ -96,9 +104,119 @@ export const ForMokInterview = ({initialData}: FormMockInterviewProps) => {
      <div className="my-6"></div>
 
      <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}></form>
+        <form onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col items-start justify-start w-full gap-6 p-8 rounded-lg shadow-md">
+            <FormField
+            control={form.control}
+            name="position"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="flex items-center justify-between w-full">
+                  <FormLabel>Job Role / Job Position</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Input
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- Full Stack Developer"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="flex items-center justify-between w-full">
+                  <FormLabel>Job Description</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Textarea
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- describle your job role"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="experience"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="flex items-center justify-between w-full">
+                  <FormLabel>Years of Experience</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Input
+                    type="number"
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- 5 Years"
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+ <FormField
+            control={form.control}
+            name="techStack"
+            render={({ field }) => (
+              <FormItem className="w-full space-y-4">
+                <div className="flex items-center justify-between w-full">
+                  <FormLabel>Tech Stacks</FormLabel>
+                  <FormMessage className="text-sm" />
+                </div>
+                <FormControl>
+                  <Textarea
+                    className="h-12"
+                    disabled={loading}
+                    placeholder="eg:- React, Typescript..."
+                    {...field}
+                    value={field.value || ""}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <div className="flex items-center justify-end w-full gap-6">
+            <Button
+              type="reset"
+              size={"sm"}
+              variant={"outline"}
+              disabled={isSubmitting || loading}
+            >
+              Reset
+            </Button>
+            <Button
+              type="submit"
+              size={"sm"}
+              disabled={isSubmitting || !isValid || loading}
+            >
+              {loading ? (
+                <Loader className="text-gray-50 animate-spin" />
+              ) : (
+                actions
+              )}
+            </Button>
+          </div>
+        </form>
      </FormProvider>
   </div>
 };
-
 
