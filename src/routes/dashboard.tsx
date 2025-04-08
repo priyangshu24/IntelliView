@@ -13,7 +13,7 @@ export const Dashboard = () => {
           />
         <Link to="/generate/create">
            <Button size={"sm"}>
-            <Plus/> Create
+            <Plus/> Add New
            </Button>
         </Link>
     </div>

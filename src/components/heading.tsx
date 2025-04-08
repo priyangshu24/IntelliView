@@ -4,8 +4,13 @@ interface HeadingsProps {
     description?: string;
     isSubHeading?: boolean;
 }
-export const Headings = ({title, description, isSubHeading = false}: HeadingsProps) => {
-    return  <div>
+export const Headings = ({title, 
+  description, 
+  isSubHeading = false
+}:
+   HeadingsProps) => {
+    return  (
+    <div>
     <h2
       className={cn(
         "text-2xl md:text-3xl text-gray-800 font-semibold font-sans",
@@ -18,5 +23,6 @@ export const Headings = ({title, description, isSubHeading = false}: HeadingsPro
       <p className="text-sm text-muted-foreground">{description}</p>
     )}
   </div>
+  );
 }
 
